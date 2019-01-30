@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homefrag"
+            android:icon="@drawable/home"
+            android:title="@string/home_string" />
+
+        <item
+            android:id="@+id/uploadmenufrag"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/upload_images_string" />
+
+        <item
+            android:id="@+id/ratefrag"
+            android:icon="@drawable/rate"
+            android:title="@string/rate" />
+        <item
+            android:id="@+id/feedbackfrag"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/feedback" />
+
+    </group>
+</menu>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".NavigationFrags.Rate">
+
+   <ImageView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:src="@drawable/playicon"
+       android:layout_marginTop="100dp"
+       android:id="@+id/play"
+       />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:text="Rate On Play Store"
+        android:background="@drawable/button"
+        android:layout_below="@+id/play"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:id="@+id/ratebutton"
+        />
+</RelativeLayout>

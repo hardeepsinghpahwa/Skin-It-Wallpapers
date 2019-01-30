@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".NavigationFrags.Upload_Images">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/textview"
+        android:layout_marginTop="100dp"
+        android:id="@+id/enteremail"
+        android:hint="Enter email"
+        android:padding="10dp"
+        />
+
+    <Button
+        android:id="@+id/selectbutton"
+        android:layout_marginTop="60dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/enteremail"
+        android:background="@drawable/button"
+        android:text="@string/select_images"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagesnumber"
+        android:layout_below="@+id/selectbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
+
+    <Button
+        android:id="@+id/uploadbutton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selectbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/button"
+        android:text="@string/upload_images"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/note"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay1" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay1" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyProgressBar" parent="@style/Widget.AppCompat.ProgressBar">
+        <item name="android:progressBackgroundTint">#69f0ae</item>
+        <item name="android:progressTint">#b71c1c</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
+
+    <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="NavigationDrawerStyle">
+
+        <item name="android:textSize">20sp</item><!-- text size in menu-->
+        <item name="android:fontFamily">@font/courgette</item>
+        <item name="android:textStyle">bold</item>
+        <!-- item size in menu-->
+        <item name="android:listPreferredItemHeightSmall">60dp</item>
+        <item name="listPreferredItemHeightSmall">60dp</item>
+
+        <!-- item padding left in menu-->
+        <item name="android:listPreferredItemPaddingLeft">20dp</item>
+        <item name="listPreferredItemPaddingLeft">20dp</item>
+
+        <!-- item padding right in menu-->
+        <item name="android:listPreferredItemPaddingRight">20dp</item>
+        <item name="listPreferredItemPaddingRight">20dp</item>
+    </style>
+
+</resources>
