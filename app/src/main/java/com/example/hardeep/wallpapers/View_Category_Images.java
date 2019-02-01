@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,6 +21,8 @@ public class View_Category_Images extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressBar progressBar;
     String category;
+    private InterstitialAd interstitialAd;
+
     FirebaseRecyclerAdapter<image_details,ViewImagesViewHolder> adapter;
 
     @Override
@@ -26,6 +31,13 @@ public class View_Category_Images extends AppCompatActivity {
         setContentView(R.layout.activity_view__category__images);
 
         category=getIntent().getStringExtra("category");
+        getSupportActionBar().setTitle(category);
+
+
+        interstitialAd=new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-9643831152040209/5697609074");
+        interstitialAd.loadAd(new AdRequest.Builder().addTestDevice("3F1257446C2A8696D45887ED25C4629F").build());
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView=findViewById(R.id.viewimagesrecyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager( this,2));
@@ -47,6 +59,11 @@ public class View_Category_Images extends AppCompatActivity {
                 viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(interstitialAd.isLoaded())
+                        {
+                            interstitialAd.show();
+                        }
+                        else Log.i("Main","Not Loaded");
                         String url=getItem(position).getImage();
                         Intent intent=new Intent(getApplicationContext(),Image_Download.class);
                         intent.putExtra("url",url);

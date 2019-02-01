@@ -18,12 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@drawable/formatfactory1"
         android:fitsSystemWindows="true"
         android:theme="@style/NavigationDrawerStyle"
-
+        app:itemTextColor="#FFFFFF"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
-
-
 
 </android.support.v4.widget.DrawerLayout>

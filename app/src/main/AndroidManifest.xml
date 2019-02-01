@@ -10,9 +10,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/skinitlogog"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@mipmap/skinitlogog_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".No_Internet"></activity>
@@ -32,6 +32,10 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9643831152040209~5461913154"/>
 
         <meta-data
             android:name="preloaded_fonts"

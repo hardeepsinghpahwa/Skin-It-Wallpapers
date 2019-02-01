@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,7 +44,6 @@ public class Categories extends Fragment {
 
         FirebaseApp.initializeApp(getActivity());
 
-
         progressBar=v.findViewById(R.id.categoriespbar);
         databaseReference=FirebaseDatabase.getInstance().getReference().child("Categories");
         recyclerview=v.findViewById(R.id.categoriesrecyclerview);
@@ -74,6 +74,13 @@ public class Categories extends Fragment {
         super.onStart();
         adapter = new FirebaseRecyclerAdapter<categories_card_details, ViewHolderClass>
                 (categories_card_details.class, R.layout.card_view, ViewHolderClass.class, databaseReference) {
+
+            @Override
+            public void onViewAttachedToWindow(@NonNull ViewHolderClass holder) {
+                super.onViewAttachedToWindow(holder);
+                progressBar.setVisibility(View.GONE);
+            }
+
             @Override
             protected void populateViewHolder(ViewHolderClass viewHolder, final categories_card_details model, int position) {
 
@@ -92,18 +99,10 @@ public class Categories extends Fragment {
                 });
             }
         };
+
+
         adapter.notifyDataSetChanged();
         recyclerview.setAdapter(adapter);
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                progressBar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                progressBar.setVisibility(View.GONE);
-            }
-        }, 5000);
     }
 
     @Override

@@ -14,4 +14,15 @@
     </android.support.v7.widget.RecyclerView>
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="No Images Yet"
+        android:textSize="30dp"
+        android:textColor="#000"
+        android:id="@+id/noimagestext"
+        android:fontFamily="@font/courgette"
+        android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>

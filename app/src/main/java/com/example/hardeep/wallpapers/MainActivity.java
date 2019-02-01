@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -30,12 +31,19 @@ import com.example.hardeep.wallpapers.NavigationFrags.Upload_Images;
 import com.example.hardeep.wallpapers.View_Pager_Frags.Categories;
 import com.example.hardeep.wallpapers.View_Pager_Frags.Downloaded_Images;
 import com.example.hardeep.wallpapers.View_Pager_Frags.Random_Images;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Categories.OnFragmentInteractionListener,Random_Images.OnFragmentInteractionListener,Downloaded_Images.OnFragmentInteractionListener {
 
     NavigationView navigationView;
+    AdView adView;
+
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -46,6 +54,12 @@ public class MainActivity extends AppCompatActivity
 
         FirebaseApp.initializeApp(getApplicationContext());
 
+        MobileAds.initialize(this,"ca-app-pub-9643831152040209~5461913154");
+
+
+        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("3F1257446C2A8696D45887ED25C4629F").build();
+        adView.loadAd(adRequest);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

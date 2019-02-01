@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.hardeep.wallpapers.R;
 
@@ -25,7 +26,9 @@ public class Downloaded_Images extends Fragment {
 
     RecyclerView recyclerView;
     String path;
+    TextView noimages;
     File[] files;
+    Local_Images_Adapter adapter;
 
     public Downloaded_Images() {
         // Required empty public constructor
@@ -42,13 +45,23 @@ public class Downloaded_Images extends Fragment {
 
         }
         else {
+
+
             path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Downloaded Images";
             File directory = new File(path); //path is the string specifying your directory path.
             files = directory.listFiles();
+            noimages=v.findViewById(R.id.noimagestext);
 
+            adapter=new Local_Images_Adapter(getfiles(),getActivity());
             recyclerView = v.findViewById(R.id.downloadedimgsrecyclerview);
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-            recyclerView.setAdapter(new Local_Images_Adapter(getfiles(), getActivity()));
+            recyclerView.setAdapter(adapter);
+
+            if(adapter.getItemCount()!=0)
+            {
+                noimages.setVisibility(View.GONE);
+            }
+
         }
         return v;
     }

@@ -1,29 +1,21 @@
 {
   "project_info": {
-    "project_number": "297351811969",
-    "firebase_url": "https://wallpapers-90637.firebaseio.com",
-    "project_id": "wallpapers-90637",
-    "storage_bucket": "wallpapers-90637.appspot.com"
+    "project_number": "432624000296",
+    "firebase_url": "https://wallpapers-51b8d.firebaseio.com",
+    "project_id": "wallpapers-51b8d",
+    "storage_bucket": "wallpapers-51b8d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:297351811969:android:47b9df03cd0a4986",
+        "mobilesdk_app_id": "1:432624000296:android:47b9df03cd0a4986",
         "android_client_info": {
           "package_name": "com.example.hardeep.wallpapers"
         }
       },
       "oauth_client": [
         {
-          "client_id": "297351811969-linn517eorgovfk8pfe92f7h644khfad.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.hardeep.wallpapers",
-            "certificate_hash": "97735ff4ba18f692c30c11a6854c64672f9b81de"
-          }
-        },
-        {
-          "client_id": "297351811969-vsr8q91bn1g549bl1s7iv1qu5i2aonfi.apps.googleusercontent.com",
+          "client_id": "432624000296-h1djrlc9p0kc5mpkvdv8ma8sep55jtur.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.hardeep.wallpapers",
@@ -31,13 +23,13 @@
           }
         },
         {
-          "client_id": "297351811969-0o8vjnrcu0dc79dn05nefp33rpm7bshs.apps.googleusercontent.com",
+          "client_id": "432624000296-92pa4m72chqqe28r9iilu8errjsi5lpa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDkA1hx8czuYrfDrBZEkPtdhzVXD6XvdBg"
+          "current_key": "AIzaSyCYd3tbhi0zxOfuHFeszsU6GOpaeucRNuY"
         }
       ],
       "services": {
@@ -48,51 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "297351811969-0o8vjnrcu0dc79dn05nefp33rpm7bshs.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:297351811969:android:92daafeb1996caa3",
-        "android_client_info": {
-          "package_name": "com.example.uploadimagestofirebase"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "297351811969-s7osfl6cvgklcgj7gb19soa875sa73eg.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.uploadimagestofirebase",
-            "certificate_hash": "f7e685fa61edd8294e5a8d40b325bff817485cc3"
-          }
-        },
-        {
-          "client_id": "297351811969-0o8vjnrcu0dc79dn05nefp33rpm7bshs.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDkA1hx8czuYrfDrBZEkPtdhzVXD6XvdBg"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "297351811969-0o8vjnrcu0dc79dn05nefp33rpm7bshs.apps.googleusercontent.com",
+              "client_id": "432624000296-92pa4m72chqqe28r9iilu8errjsi5lpa.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

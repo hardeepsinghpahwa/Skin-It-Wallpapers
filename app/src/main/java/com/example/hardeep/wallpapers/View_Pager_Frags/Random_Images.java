@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +24,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Random_Images extends Fragment {
+public class Random_Images extends Fragment{
 
     private OnFragmentInteractionListener mListener;
 
@@ -45,7 +47,6 @@ public class Random_Images extends Fragment {
 
         FirebaseApp.initializeApp(getActivity());
 
-
         recyclerView=v.findViewById(R.id.randomrecyclerview);
         dataref=FirebaseDatabase.getInstance().getReference().child("Random");
         p=v.findViewById(R.id.prbarrandom);
@@ -57,6 +58,14 @@ public class Random_Images extends Fragment {
         super.onStart();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<getimage, ImgViewHolder>
                 (getimage.class, R.layout.imageformat, ImgViewHolder.class, dataref) {
+
+
+            @Override
+            public void onViewAttachedToWindow(@NonNull ImgViewHolder holder) {
+                super.onViewAttachedToWindow(holder);
+                p.setVisibility(View.GONE);
+            }
+
             @Override
             protected void populateViewHolder(ImgViewHolder viewHolder, getimage model, final int position) {
                 viewHolder.setImage(getActivity(), model.getImage());
@@ -77,11 +86,6 @@ public class Random_Images extends Fragment {
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        if (recyclerView.isActivated()) {
-            p.setBackgroundColor(Color.parseColor("FFFFFF"));
-            p.setVisibility(View.GONE);
-            loading.setVisibility(View.GONE);
-        }
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

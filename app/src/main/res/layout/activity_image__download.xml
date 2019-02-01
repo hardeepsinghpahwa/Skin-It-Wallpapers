@@ -35,6 +35,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp"
         />
 
     <ImageView
@@ -44,6 +45,7 @@
         android:src="@mipmap/greentick"
         android:id="@+id/downloaddone"
         android:focusable="true"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:visibility="invisible"
         />
