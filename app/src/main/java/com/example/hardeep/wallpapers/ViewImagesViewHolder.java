@@ -15,6 +15,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,17 +50,17 @@ public class ViewImagesViewHolder extends RecyclerView.ViewHolder {
         imageView = view.findViewById(R.id.pic);
         progressBar = view.findViewById(R.id.pbar);
         progressBar.setVisibility(View.VISIBLE);
-        GlideApp.with(c).load(image).centerCrop().thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.NONE).listener(new RequestListener<Drawable>() {
+
+        Picasso.get().load(image).resize(300,283).centerCrop().into(imageView, new Callback() {
             @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                return false;
+            public void onSuccess() {
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                progressBar.setVisibility(View.INVISIBLE);
-                return false;
+            public void onError(Exception e) {
+
             }
-        }).into(imageView);
+        });
     }
 }

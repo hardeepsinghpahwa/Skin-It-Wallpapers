@@ -17,6 +17,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.hardeep.wallpapers.GlideApp;
 import com.example.hardeep.wallpapers.R;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -50,17 +52,16 @@ public class ImgViewHolder extends RecyclerView.ViewHolder {
         img = v.findViewById(R.id.pic);
         p = v.findViewById(R.id.pbar);
         p.setVisibility(View.VISIBLE);
-        GlideApp.with(c).load(image).centerCrop().thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.NONE).listener(new RequestListener<Drawable>() {
+        Picasso.get().load(image).resize(350,283).centerCrop().into(img, new Callback() {
             @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                return false;
+            public void onSuccess() {
+                p.setVisibility(View.INVISIBLE);
             }
 
             @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                p.setVisibility(View.INVISIBLE);
-                return false;
+            public void onError(Exception e) {
+
             }
-        }).into(img);
+        });
     }
 }

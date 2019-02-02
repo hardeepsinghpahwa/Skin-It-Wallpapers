@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,7 @@ public class Random_Images extends Fragment{
                     public void onClick(View v) {
                         url = getItem(position).getImage();
 
-
+                        Log.i("URL", url);
                         Intent intent = new Intent(getActivity(), Image_Download.class);
                         intent.putExtra("url", url);
                         startActivity(intent);

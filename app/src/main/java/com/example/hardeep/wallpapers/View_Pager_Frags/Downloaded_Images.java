@@ -53,6 +53,7 @@ public class Downloaded_Images extends Fragment {
             noimages=v.findViewById(R.id.noimagestext);
 
             adapter=new Local_Images_Adapter(getfiles(),getActivity());
+            adapter.notifyDataSetChanged();
             recyclerView = v.findViewById(R.id.downloadedimgsrecyclerview);
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             recyclerView.setAdapter(adapter);

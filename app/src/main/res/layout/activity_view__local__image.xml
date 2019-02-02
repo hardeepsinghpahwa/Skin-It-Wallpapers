@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".View_Local_Image">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/localimage"
+        android:scaleType="centerCrop"
+        />
+
+
 </RelativeLayout>

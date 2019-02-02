@@ -15,6 +15,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -65,10 +66,12 @@ public class Image_Download extends AppCompatActivity {
         p.setCanceledOnTouchOutside(false);
         p.setMessage("Downloading");
         url=getIntent().getStringExtra("url");
+        Log.i("URL",url);
 
         GlideApp.with(getApplicationContext()).load(url).fitCenter().listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, com.bumptech.glide.request.target.Target<Drawable> target, boolean isFirstResource) {
+                Toast.makeText(Image_Download.this,"Load Failed! Check Your connection",Toast.LENGTH_SHORT);
                 progressBar.setVisibility(View.GONE);
                 return false;
             }
