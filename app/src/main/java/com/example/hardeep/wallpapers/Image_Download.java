@@ -45,7 +45,7 @@ public class Image_Download extends AppCompatActivity {
     DatabaseReference databaseReference;
     ProgressDialog p;
     ProgressBar progressBar;
-    String url;
+    String url,position;
     AsyncTask mMyTask;
     ImageView previewimg;
 
@@ -59,6 +59,7 @@ public class Image_Download extends AppCompatActivity {
         previewimg = findViewById(R.id.previewimage);
         progressBar=findViewById(R.id.pbarr);
         done=findViewById(R.id.downloaddone);
+        position=getIntent().getStringExtra("pos");
         databaseReference=FirebaseDatabase.getInstance().getReference();
 
         p=new ProgressDialog(Image_Download.this);

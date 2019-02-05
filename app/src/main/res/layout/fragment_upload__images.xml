@@ -55,7 +55,6 @@
         android:layout_height="wrap_content"
         android:text="@string/note"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
         />
 
 </RelativeLayout>

@@ -58,8 +58,11 @@ public class MainActivity extends AppCompatActivity
 
 
         adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("3F1257446C2A8696D45887ED25C4629F").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+
+        Log.i("Info", String.valueOf(adRequest.isTestDevice(MainActivity.this)));
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

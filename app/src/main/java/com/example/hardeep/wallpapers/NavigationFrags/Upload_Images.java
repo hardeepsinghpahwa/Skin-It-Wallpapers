@@ -21,6 +21,7 @@ import com.example.hardeep.wallpapers.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,10 +40,12 @@ import static android.app.Activity.RESULT_OK;
  */
 public class Upload_Images extends Fragment {
 
-    Button uploadimage, selectimage;
     private static final int PICK_IMAGE_MULTIPLE = 1;
+    Button uploadimage, selectimage;
     Uri fileuri;
     int selecteditems;
+    EditText email;
+    FirebaseAuth auth;
     TextView selimgs;
     ProgressDialog progressDialog;
     StorageReference reference;
@@ -50,12 +53,11 @@ public class Upload_Images extends Fragment {
     ArrayList<Uri> uris;
     ArrayList<String> urls;
     int j;
-    EditText email;
+
 
     public Upload_Images() {
         // Required empty public constructor
     }
-
 
     public String getFileName(Uri uri) {
         String result = null;
@@ -99,16 +101,18 @@ public class Upload_Images extends Fragment {
         }
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_upload__images, container, false);
+        View v = inflater.inflate(R.layout.fragment_upload__images, container, false);
+
         uris = new ArrayList<>();
         uris.clear();
-        email=v.findViewById(R.id.enteremail);
         urls = new ArrayList<>();
         urls.clear();
+        email=v.findViewById(R.id.enteremail);
         selectimage = v.findViewById(R.id.selectbutton);
         uploadimage = v.findViewById(R.id.uploadbutton);
         selimgs=v.findViewById(R.id.imagesnumber);
@@ -120,7 +124,7 @@ public class Upload_Images extends Fragment {
 
                 if(!Validate_email(email.getText().toString()))
                 {
-                    email.setError("Incorrect email");
+                    email.setError("Incorrect Email");
                     email.requestFocus();
                 }
                 else {
@@ -143,14 +147,14 @@ public class Upload_Images extends Fragment {
 
                 for (j = 0; j < uris.size(); j++) {
 
-                    reference = FirebaseStorage.getInstance().getReference().child("UserImages" + "/" + email+"/"+UUID.randomUUID().toString());
+                    reference = FirebaseStorage.getInstance().getReference().child("UserImages" + "/" + email.getText().toString()+"/" + UUID.randomUUID().toString());
                     reference.putFile(uris.get(j)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             if(j==uris.size())
-                            {
-                                progressDialog.dismiss();
-                                Toast.makeText(getActivity(), "Sent!", Toast.LENGTH_SHORT).show();
+                            {progressDialog.dismiss();
+                                Toast.makeText(getActivity(), "Images Sent!", Toast.LENGTH_SHORT).show();
+                                email.setText("");
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -176,4 +180,10 @@ public class Upload_Images extends Fragment {
         return matcher.matches();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth=FirebaseAuth.getInstance();
+        auth.signInAnonymously();
+    }
 }

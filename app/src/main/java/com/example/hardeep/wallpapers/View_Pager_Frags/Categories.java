@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.example.hardeep.wallpapers.R;
 import com.example.hardeep.wallpapers.View_Category_Images;
 import com.example.hardeep.wallpapers.categories_card_details;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,6 +31,7 @@ public class Categories extends Fragment {
     private OnFragmentInteractionListener mListener;
     private ProgressBar progressBar;
     RecyclerView recyclerview;
+    private InterstitialAd interstitialAd;
     DatabaseReference databaseReference;
     FirebaseRecyclerAdapter<categories_card_details,ViewHolderClass> adapter;
 
@@ -43,6 +47,11 @@ public class Categories extends Fragment {
         View v= inflater.inflate(R.layout.fragment_categories, container, false);
 
         FirebaseApp.initializeApp(getActivity());
+
+        interstitialAd=new InterstitialAd(getActivity());
+        interstitialAd.setAdUnitId("ca-app-pub-9643831152040209/3682825418");
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+
 
         progressBar=v.findViewById(R.id.categoriespbar);
         databaseReference=FirebaseDatabase.getInstance().getReference().child("Categories");
@@ -91,6 +100,12 @@ public class Categories extends Fragment {
                     @Override
                     public void onClick(View v) {
                         {
+                            if(interstitialAd.isLoaded())
+                            {
+                                interstitialAd.show();
+                            }
+                            else Log.i("Main","Not Loaded");
+
                             Intent i = new Intent(getActivity(), View_Category_Images.class);
                             i.putExtra("category", model.getText());
                             startActivity(i);

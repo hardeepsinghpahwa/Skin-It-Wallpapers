@@ -1,16 +1,21 @@
 package com.example.hardeep.wallpapers.NavigationFrags;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.hardeep.wallpapers.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,7 +28,6 @@ public class Feedback extends Fragment {
     EditText email,feedback;
     DatabaseReference databaseReference;
     Button submit;
-    String mail,feed;
 
     public Feedback() {
         // Required empty public constructor
@@ -43,15 +47,28 @@ public class Feedback extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!Validate_email(mail))
+                if(!Validate_email(email.getText().toString()))
                 {
                     email.setError("Incorrect email");
                     email.requestFocus();
                 }
                 else
                 {
-                    databaseReference.child("feedback").child(UUID.randomUUID().toString()).child("email").setValue(mail);
-                    databaseReference.child("feedback").child(UUID.randomUUID().toString()).child("feedback").setValue(feed);
+                    final ProgressDialog p=new ProgressDialog(getActivity());
+                    p.setTitle("Sending Feedback");
+                    p.setCancelable(false);
+                    p.show();
+                    String a=UUID.randomUUID().toString();
+                    databaseReference.child("Feedback").child(a).child("email").setValue(email.getText().toString());
+                    databaseReference.child("Feedback").child(a).child("feedback").setValue(feedback.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            p.dismiss();
+                            email.setText("");
+                            feedback.setText("");
+                            Toast.makeText(getActivity(),"Thank You For the Feedback",Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
