@@ -33,6 +33,8 @@ public class Random_Images extends Fragment{
     FirebaseRecyclerAdapter<getimage,ImgViewHolder> firebaseRecyclerAdapter;
     DatabaseReference dataref;
     ProgressBar p;
+    boolean alreadyExecuted=false;
+    int pos=0;
     TextView loading;
     String url;
 
@@ -65,6 +67,10 @@ public class Random_Images extends Fragment{
             public void onViewAttachedToWindow(@NonNull ImgViewHolder holder) {
                 super.onViewAttachedToWindow(holder);
                 p.setVisibility(View.GONE);
+                if(!alreadyExecuted) {
+                    recyclerView.smoothScrollToPosition(pos);
+                    alreadyExecuted = true;
+                }
             }
 
             @Override
@@ -79,6 +85,7 @@ public class Random_Images extends Fragment{
                         Log.i("URL", url);
                         Intent intent = new Intent(getActivity(), Image_Download.class);
                         intent.putExtra("url", url);
+                        pos=position;
                         startActivity(intent);
                     }
                 });
@@ -107,21 +114,18 @@ public class Random_Images extends Fragment{
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+            Log.i("po",Integer.toString(pos));
+            alreadyExecuted=false;
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

@@ -55,6 +55,7 @@ public class Image_Download extends AppCompatActivity {
         setContentView(R.layout.activity_image__download);
 
         getSupportActionBar().setTitle("Preview Image");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         downloadbutton = findViewById(R.id.downloadbutton);
         previewimg = findViewById(R.id.previewimage);
         progressBar=findViewById(R.id.pbarr);
@@ -193,6 +194,12 @@ public class Image_Download extends AppCompatActivity {
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         sendBroadcast(mediaScanIntent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override

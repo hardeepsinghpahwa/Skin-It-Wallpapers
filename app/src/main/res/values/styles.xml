@@ -34,8 +34,8 @@
 
     <style name="NavigationDrawerStyle">
 
-        <item name="android:textSize">20sp</item><!-- text size in menu-->
-        <item name="android:fontFamily">@font/courgette</item>
+        <item name="android:textSize">25sp</item><!-- text size in menu-->
+        <item name="android:fontFamily">@font/great_vibes</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFFFFF</item>
         <!-- item size in menu-->

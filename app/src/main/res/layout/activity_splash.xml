@@ -10,11 +10,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/great_vibes"
         android:gravity="center_horizontal"
-        android:fontFamily="@font/courgette"
-        android:text= " Skin It "
+        android:text=" Skin It "
         android:textColor="#FFFFFF"
         android:textSize="80sp"
         android:textStyle="bold" />

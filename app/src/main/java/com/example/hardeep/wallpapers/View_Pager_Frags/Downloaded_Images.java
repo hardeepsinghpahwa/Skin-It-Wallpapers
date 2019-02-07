@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class Downloaded_Images extends Fragment {
     RecyclerView recyclerView;
     String path;
     TextView noimages;
+    View v;
     File[] files;
     Local_Images_Adapter adapter;
 
@@ -38,8 +40,9 @@ public class Downloaded_Images extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_downloaded__images, container, false);
+        v= inflater.inflate(R.layout.fragment_downloaded__images, container, false);
         if(!checkWriteExternalPermission())
         {            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
@@ -53,7 +56,6 @@ public class Downloaded_Images extends Fragment {
             noimages=v.findViewById(R.id.noimagestext);
 
             adapter=new Local_Images_Adapter(getfiles(),getActivity());
-            adapter.notifyDataSetChanged();
             recyclerView = v.findViewById(R.id.downloadedimgsrecyclerview);
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             recyclerView.setAdapter(adapter);
@@ -90,12 +92,7 @@ public class Downloaded_Images extends Fragment {
         super.onDetach();
         mListener = null;
     }
-    private boolean checkWriteExternalPermission()
-    {
-        String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-        int res = getActivity().checkCallingOrSelfPermission(permission);
-        return (res == PackageManager.PERMISSION_GRANTED);
-    }
+
 
     public ArrayList<Uri> getfiles()
     {
@@ -117,6 +114,38 @@ public class Downloaded_Images extends Fragment {
         }
 
         return  imgs;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(!checkWriteExternalPermission())
+        {            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},1);
+
+        }
+        else {
+            Log.i("Resume", "Yes");
+            getfiles();
+            adapter = new Local_Images_Adapter(getfiles(), getActivity());
+            adapter.notifyDataSetChanged();
+            recyclerView=v.findViewById(R.id.downloadedimgsrecyclerview);
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            recyclerView.setAdapter(adapter);
+            noimages=v.findViewById(R.id.noimagestext);
+            if(adapter.getItemCount()!=0)
+            {
+                noimages.setVisibility(View.GONE);
+            }
+
+        }
+    }
+
+    private boolean checkWriteExternalPermission()
+    {
+        String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        int res = getActivity().checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
     }
 
     public interface OnFragmentInteractionListener {

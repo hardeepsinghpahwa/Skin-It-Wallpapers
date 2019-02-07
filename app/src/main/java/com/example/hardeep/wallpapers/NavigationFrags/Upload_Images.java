@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +45,7 @@ public class Upload_Images extends Fragment {
     private static final int PICK_IMAGE_MULTIPLE = 1;
     Button uploadimage, selectimage;
     Uri fileuri;
+    TextView min2;
     int selecteditems;
     EditText email;
     FirebaseAuth auth;
@@ -59,30 +62,6 @@ public class Upload_Images extends Fragment {
         // Required empty public constructor
     }
 
-    public String getFileName(Uri uri) {
-        String result = null;
-        if (Objects.equals(uri.getScheme(), "content")) {
-            Cursor cursor = Objects.requireNonNull(getActivity()).getContentResolver().query(uri, null, null, null, null);
-            try {
-                if (cursor != null && cursor.moveToFirst()) {
-                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                }
-            } finally {
-                assert cursor != null;
-                cursor.close();
-            }
-        }
-        if (result == null) {
-            result = uri.getPath();
-            assert result != null;
-            int cut = result.lastIndexOf('/');
-            if (cut != -1) {
-                result = result.substring(cut + 1);
-            }
-        }
-        return result;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -90,100 +69,117 @@ public class Upload_Images extends Fragment {
         if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK) {
             if (data.getClipData() != null) {
                 selecteditems = data.getClipData().getItemCount();
-                selimgs.setText("Selected Images : "+Integer.toString(selecteditems));
+                selimgs.setVisibility(View.VISIBLE);
+                selimgs.setText("Selected Images : " + Integer.toString(selecteditems));
+
                 for (int k = 0; k < selecteditems; k++) {
                     fileuri = data.getClipData().getItemAt(k).getUri();
                     uris.add(fileuri);
 
                 }
-
             }
         }
     }
+        @Override
+        public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            View v = inflater.inflate(R.layout.fragment_upload__images, container, false);
+
+            uris = new ArrayList<>();
+            uris.clear();
+            urls = new ArrayList<>();
+            urls.clear();
+            email=v.findViewById(R.id.enteremail);
+            selectimage = v.findViewById(R.id.selectbutton);
+            uploadimage = v.findViewById(R.id.uploadbutton);
+            min2=v.findViewById(R.id.min2imgs);
+            selimgs=v.findViewById(R.id.imagesnumber);
 
 
-    @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_upload__images, container, false);
+            selectimage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        uris = new ArrayList<>();
-        uris.clear();
-        urls = new ArrayList<>();
-        urls.clear();
-        email=v.findViewById(R.id.enteremail);
-        selectimage = v.findViewById(R.id.selectbutton);
-        uploadimage = v.findViewById(R.id.uploadbutton);
-        selimgs=v.findViewById(R.id.imagesnumber);
-
-
-        selectimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(!Validate_email(email.getText().toString()))
-                {
-                    email.setError("Incorrect Email");
-                    email.requestFocus();
+                    if(!Validate_email(email.getText().toString()))
+                    {
+                        email.setError("Incorrect Email");
+                        email.requestFocus();
+                    }
+                    else {
+                        selecteditems=0;
+                        uris.clear();
+                        urls.clear();
+                        Intent intent = new Intent();
+                        intent.setType("image/*");
+                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        startActivityForResult(Intent.createChooser(intent, "Select min 2 images"), PICK_IMG);
+                    }
                 }
-                else {
-                    Intent intent = new Intent();
-                    intent.setType("image/*");
-                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(intent, "Select image"), PICK_IMG);
-                }
-            }
-        });
+            });
 
-        uploadimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            uploadimage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                progressDialog = new ProgressDialog(getActivity());
-                progressDialog.setMessage("Sending Images");
-                progressDialog.show();
+                    if(selecteditems<2)
+                    {
+                        min2.setError("Min 2 images required");
+                        min2.requestFocus();
+                    }
+                    else
+                    {
+                    progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setMessage("Sending Images");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
 
-                for (j = 0; j < uris.size(); j++) {
+                    for (j = 0; j < uris.size(); j++) {
 
-                    reference = FirebaseStorage.getInstance().getReference().child("UserImages" + "/" + email.getText().toString()+"/" + UUID.randomUUID().toString());
-                    reference.putFile(uris.get(j)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(j==uris.size())
-                            {progressDialog.dismiss();
-                                Toast.makeText(getActivity(), "Images Sent!", Toast.LENGTH_SHORT).show();
-                                email.setText("");
+                        reference = FirebaseStorage.getInstance().getReference().child("UserImages" + "/" + email.getText().toString()+"/" + UUID.randomUUID().toString());
+                        reference.putFile(uris.get(j)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                if(j==uris.size())
+                                {
+                                    progressDialog.dismiss();
+                                    uris.clear();
+                                    urls.clear();
+                                    selimgs.setVisibility(View.GONE);
+
+                                    Toast.makeText(getActivity(), "Images Sent!", Toast.LENGTH_SHORT).show();
+                                    email.setText("");
+                                }
                             }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getActivity(), "Some Error occured : Sending Failed", Toast.LENGTH_SHORT).show();
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity(), "Some Error occured : Sending Failed", Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
-            }
-        });
+                }
+            });
 
-        return v;
+            return v;
 
+        }
+
+        private boolean Validate_email(String s) {
+            String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+            Pattern pattern = Pattern.compile(emailPattern);
+            Matcher matcher = pattern.matcher(email.getText().toString());
+
+            return matcher.matches();
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            auth=FirebaseAuth.getInstance();
+            auth.signInAnonymously();
+        }
     }
-
-    private boolean Validate_email(String s) {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        Pattern pattern = Pattern.compile(emailPattern);
-        Matcher matcher = pattern.matcher(email.getText().toString());
-
-        return matcher.matches();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        auth=FirebaseAuth.getInstance();
-        auth.signInAnonymously();
-    }
-}
