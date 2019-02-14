@@ -37,9 +37,6 @@ import java.util.regex.Pattern;
 import static android.app.Activity.RESULT_OK;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Upload_Images extends Fragment {
 
     private static final int PICK_IMAGE_MULTIPLE = 1;
