@@ -8,6 +8,50 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:432624000296:android:4781a6a14d725903",
+        "android_client_info": {
+          "package_name": "com.example.hardeep.upload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432624000296-ud8ned8cv8omuiqh7sbnq7eeao0uks3u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hardeep.upload",
+            "certificate_hash": "f7e685fa61edd8294e5a8d40b325bff817485cc3"
+          }
+        },
+        {
+          "client_id": "432624000296-92pa4m72chqqe28r9iilu8errjsi5lpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYd3tbhi0zxOfuHFeszsU6GOpaeucRNuY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432624000296-92pa4m72chqqe28r9iilu8errjsi5lpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:432624000296:android:47b9df03cd0a4986",
         "android_client_info": {
           "package_name": "com.example.hardeep.wallpapers"
@@ -19,6 +63,51 @@
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.hardeep.wallpapers",
+            "certificate_hash": "f7e685fa61edd8294e5a8d40b325bff817485cc3"
+          }
+        },
+        {
+          "client_id": "432624000296-92pa4m72chqqe28r9iilu8errjsi5lpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYd3tbhi0zxOfuHFeszsU6GOpaeucRNuY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432624000296-92pa4m72chqqe28r9iilu8errjsi5lpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-9643831152040209~5461913154"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432624000296:android:3c4f27e8170915ad",
+        "android_client_info": {
+          "package_name": "com.pahwa.hardeep.wallpapers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432624000296-o4c42t1mo4qtvk4gnoslfiuq9je9tvh4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pahwa.hardeep.wallpapers",
             "certificate_hash": "f7e685fa61edd8294e5a8d40b325bff817485cc3"
           }
         },

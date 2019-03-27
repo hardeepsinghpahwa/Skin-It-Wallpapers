@@ -23,4 +23,5 @@
     <string name="note">Note:The images can\'t be directly uploaded but will be sent to the admin and then will be uploaded if approved.</string>
     <string name="select_images">Select Images</string>
     <string name="upload_images">Upload Images</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>
