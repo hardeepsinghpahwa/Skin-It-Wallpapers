@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NavigationFrags.Privacy_Policy">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/privacy_policy"
+       android:layout_centerHorizontal="true"
+       android:textSize="25sp"
+       android:layout_marginTop="100dp"
+       android:id="@+id/prihead"
+       android:textColor="#000"
+       />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For Knowing The Private Policy Please Click:"
+        android:layout_below="@+id/prihead"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:id="@+id/pleasevisit"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to the Privacy Policy"
+        android:background="@drawable/button"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:id="@+id/privacypol"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/pleasevisit"
+        android:layout_centerVertical="true"
+        />
+
+</RelativeLayout>
